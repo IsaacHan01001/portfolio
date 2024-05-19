@@ -1,0 +1,31 @@
+
+Let's talk about DNA.
+
+1953 Molecular shape of DNA.
+3D modelling techniques: NMR, X-ray crystalography, snell's law 
+But, we are going to do something simpler.  - parametric regression
+Helix - Wolfram. Let's do regression on Helix structure and see the error between 1953 paper and our model.
+From helixical structure, increase the DOE by introducing free parameters. And repeat the regression, and see the difference.
+
+Mischevious: Pair: A-T C-G :chemistry
+Future Research: AI model crispr prediction, isn't it viable to use those techiques to improve/ Neural Network?
+
+In 1953 paper, "Molecular Structure of Nucleic Acids: A Structure for Deoxyribose Nucleic Acid," James Watson and Francis Crick unveiled the double helix structure of DNA. This discovery marked a pivotal moment in molecular biology, providing insights into how genetic information is stored and replicated. The central dogma of life, how certain traits are exhibited across generations, can be explain through the matter of inheritance. And the discovering the structure of DNA is a question requires studies from several disciplines, including chemistry, mathematics, and biology. In this paper, the process of constructing the geometrical shape of DNA was performed with modern regression techniques. 
+The structure of DNA, widely known today's textbook is a double helixical shape. These strands are composed of repeating units of nucleotides, each consisting of deoxyribose, a phosphate group, and a nitrogenous base. The nitrogenous bases are of four types: adenine (A), thymine (T), guanine (G), and cytosine (C). Crucially, the bases pair specifically, with adenine always pairing with thymine and guanine always pairing with cytosine. This complementary base pairing is facilitated by hydrogen bonds: two between A and T, and three between G and C.
+
+Typically, molecular shapes are determined by theoretical and experimental methods. A simple theoretical molecular prediction might be the VESPR geometry that we learned in the highschool chemistry class. However, such theoretical predictions are crude, or rather unverified. One may need experimental or more profound measures to determine the molecular shapes. In modern time, the two most popular options are NMR and X-ray. NMR, also known as Nulcear Magnetic Resonance, typically looks for the interaction between magnetic fields and the nuclei of hydrogen( or carbon(, in a sample. X-ray crystallography and diffraction use Bragg's Law to predict the distances between atomic planes in a crystal.
+
+This paper simply sought to construct a simple DNA model from published X-ray data. X-ray crystallography and diffraction has bases on Bragg's Law, which can be simplified as following.
+
+Bragg's Law:Bragg's Law is given by the equation: 𝑛𝜆=2𝑑sin⁡𝜃nλ=2dsinθwhere:
+𝑛n is the order of the reflection (an integer),
+𝜆λ is the wavelength of the incident X-rays,
+𝑑d is the distance between the planes in the crystal lattice,
+𝜃θ is the angle of incidence (Bragg angle).
+This law is used in X-ray crystallography to determine the structure of crystalline materials. By measuring the angles and intensities of the diffracted X-rays, scientists can infer the positions of the atoms within the crystal.
+
+model was supported by existing X-ray diffraction data, notably from Rosalind Franklin and Maurice Wilkins, which provided critical insights into the helical structure of DNA. The clarity of Franklin's X-ray images was instrumental in confirming the helical nature of DNA and in detailing the specific dimensions of the helix​ (Embryo Project Encyclopedia)​​ (SCARC)​.
+
+The discovery of the double helix not only explained how genetic information is stored but also suggested a mechanism for its replication. The complementary nature of the two DNA strands means that each strand can serve as a template for the creation of a new complementary strand, ensuring accurate transmission of genetic information during cell division​ (Nature)​.
+Watson and Crick's 1953 paper revolutionized the field of genetics, shifting the focus from the chemical composition of DNA to its functional implications in heredity and protein synthesis. Their work laid the foundation for modern molecular biology and biotechnology, leading to advancements such as gene sequencing and genetic engineering​ (Wikipedia)​​ (Embryo Project Encyclopedia)​.
+For a high school or freshman research paper, exploring the historical context and scientific significance of this discovery can provide a rich and engaging topic. Additionally, delving into how the DNA structure can be modeled using parametric equations offers a fascinating intersection of biology and mathematics, illustrating the universal applicability of mathematical principles in scientific discovery.
