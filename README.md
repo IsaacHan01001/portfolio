@@ -1,5 +1,7 @@
 Name: Isaac Han(한이삭)
 
+Taking: A graduate certificate from Deakin University.
+
 Major/School: BS. Physics from UCLA
 
 Seeking: Teaching / Data Science / OCR / NLP
