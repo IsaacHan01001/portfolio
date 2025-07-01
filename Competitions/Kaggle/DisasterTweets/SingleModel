@@ -1,0 +1,130 @@
+import os
+import numpy as np
+import pandas as pd
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import TextVectorization, Embedding, GlobalAveragePooling1D, Dense
+
+def merge_text(df):
+    # Fill missing values. It's good practice to mark them as 'unknown'.
+    df["keyword"] = df["keyword"].fillna("unknown")
+    df["location"] = df["location"].fillna("unknown").str.lower()
+    
+    # Combine the columns into a single, more informative text string.
+    df["full_text"] = df["text"] + " keyword: " + df["keyword"] + " location: " + df["location"]
+    return df
+
+# --- 2. Load Data ---
+# It's good practice to place your data in a known subdirectory.
+# Adjust this path if your files are located elsewhere.
+path = os.path.join(".", "_data", "kaggle", "Disaster_Tweets")
+pathTrain = os.path.join(path, "train.csv")
+pathTest = os.path.join(path, "test.csv")
+pathSubmission = os.path.join(path, "sample_submission.csv")
+
+train_df = pd.read_csv(pathTrain)
+test_df = pd.read_csv(pathTest)
+submission_df = pd.read_csv(pathSubmission)
+
+# Apply the preprocessing function to both training and test data.
+train_df = merge_text(train_df)
+test_df = merge_text(test_df)
+
+# --- 3. Vectorize Text ---
+# TextVectorization turns raw strings into integer sequences.
+
+# Define model constants
+max_tokens = 10000  # Maximum number of words in our vocabulary.
+sequence_length = 100 # Maximum length of a sequence. Tweets will be padded or truncated to this length.
+
+# Create the TextVectorization layer
+vectorizer = TextVectorization(
+    max_tokens=max_tokens,
+    output_mode='int',  # Each word will be represented by an integer index.
+    output_sequence_length=sequence_length,
+)
+
+# Build the vocabulary from the training data. The layer "learns" the words here.
+# We use the 'full_text' column we created.
+vectorizer.adapt(train_df['full_text'])
+
+# You can inspect the vocabulary if you want:
+# print("Vocabulary (first 20 words):", vectorizer.get_vocabulary()[:20])
+
+# --- 4. Build the Model ---
+# This model will perform binary classification (predicting 0 or 1).
+
+model = Sequential([
+    # Input layer: Takes raw text strings.
+    # This is not a real layer, just tells Keras the expected input shape.
+    tf.keras.Input(shape=(1,), dtype=tf.string),
+    
+    # 1. Vectorization Layer: Converts text to integer sequences.
+    vectorizer,
+    
+    # 2. Embedding Layer: Converts integer sequences into dense vector embeddings.
+    # It learns a vector representation for each word in the vocabulary.
+    # input_dim must be the size of our vocabulary (max_tokens).
+    # output_dim is the size of the vector for each word (e.g., 128 dimensions).
+    Embedding(input_dim=max_tokens, output_dim=128),
+    
+    # 3. Pooling Layer: Reduces the sequence of vectors to a single vector per tweet.
+    # GlobalAveragePooling1D averages the vectors for all words in the tweet.
+    GlobalAveragePooling1D(),
+    
+    # 4. Hidden Dense Layer: A standard fully-connected layer for learning complex patterns.
+    Dense(64, activation='relu'),
+    
+    # 5. Output Layer: A single neuron with a sigmoid activation function.
+    # Sigmoid outputs a probability between 0 and 1, perfect for binary classification.
+    Dense(1, activation='sigmoid')
+])
+
+# --- 5. Compile the Model ---
+# We configure the model for training.
+model.compile(
+    loss='binary_crossentropy',      # The best loss function for binary (0/1) problems.
+    optimizer='adam',                # A popular and effective optimizer.
+    metrics=['accuracy']             # We want to monitor accuracy during training.
+)
+
+# Print a summary of the model architecture.
+model.summary()
+
+# --- 6. Train the Model ---
+# We fit the model on our training data.
+X_train = train_df['full_text']
+y_train = train_df['target']
+
+from tensorflow.keras.callbacks import EarlyStopping
+es = EarlyStopping(
+    monitor = "val_loss", 
+    mode = "min", 
+    patience = 20,
+    restore_best_weights=True,
+)
+
+history = model.fit(
+    X_train,
+    y_train,
+    epochs=1000,                          # Number of times to go through the entire dataset.
+    validation_split=0.2,              # Use 20% of the data for validation during training.
+    batch_size=32,                      # Number of samples per gradient update.
+    callbacks = [es]
+)
+
+# --- 7. Make Predictions and Create Submission File ---
+# Use the trained model to predict on the unseen test data.
+X_test = test_df['full_text']
+predictions = model.predict(X_test)
+
+# The model outputs probabilities (e.g., 0.9, 0.1, 0.45).
+# We need to convert these to 0s and 1s. A common threshold is 0.5.
+binary_predictions = (predictions > 0.5).astype(int)
+
+# Create the submission file in the required format.
+submission_df['target'] = binary_predictions
+submission_df.to_csv(os.path.join(path, 'submission.csv'), index=False)
+
+print("\nSubmission file 'submission.csv' created successfully!")
+print(submission_df.head())
