@@ -15,3 +15,5 @@ Noisy Experiment and reduction techniques are explored in this dataset published
 * Binary Classifier: highly accurate binary filter distinguishing TDC conformed CYP3A4 inhibitors and non-inhibitors.
 * Competition.py: Base Unimol training and prediction using customized (debugged + added functionality) Unimol source file.
 * ColumnFiltering.py: With auto feature generator using RdKit(Taken from user Cao in Kaggle notebook) and xgbboost pipeline.
+* Noisy Label Reduced: Among Single Generalist, multiple experts, and one generalist, training set feature engineered, training set noise filtered, it was a method of 
+actively filtering noisy labels that do not conform to the TDC CYP3A4_Veith Dataset.
