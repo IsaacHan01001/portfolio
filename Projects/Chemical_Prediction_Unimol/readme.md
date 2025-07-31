@@ -1,5 +1,6 @@
 * I changed the Unimol Source code to accept an external validation file. Without the modified Unimol source code, copying and pasting code might not work.
-
+* Many CSV files and pth files are omitted due to size.
+* 
 Currently working to publish a research paper on Machine learning methodology(Pseudo Labelling and Transferable learning)
 and applications of Unimol, which was published on Arxiv at Cornell in 2023. 
 
