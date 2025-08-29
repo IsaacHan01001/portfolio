@@ -8,7 +8,7 @@ Purpose: Creating a local data-based reasoning agent, with source citation.
 Run1 and Run2: Created words list template vs sentence construction models.
 
 Sample output: Source citation with source summary.
-<img width="1892" height="601" alt="image" src="https://github.com/user-attachments/assets/72c00287-eb4e-412a-a548-c46ceed81f93" />
+<img width="1402" height="747" alt="image" src="https://github.com/user-attachments/assets/aa96de1a-f61e-4c14-adf9-e6d4bfa06e49" />
 
 
 
