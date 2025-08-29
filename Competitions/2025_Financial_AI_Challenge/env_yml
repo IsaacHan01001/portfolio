@@ -1,0 +1,26 @@
+# env_final.yml
+# This is the final, correct base environment file.
+# It specifies Python 3.10 to match the available PyTorch builds.
+
+name: legal-gemma-korean
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10  # <-- THE CRITICAL CHANGE IS HERE
+  - pip
+  - pip:
+    - langchain
+    - langchain_community
+    - langchain-huggingface
+    - pypdf
+    - faiss-cpu
+    - sentence-transformers
+    - ollama
+    - kss
+    - pandas
+
+  # torch version failed: manually installed using:
+
+  ##############################################################################
+  # conda install "pytorch>=2.6.0" pytorch-cuda=11.8 -c pytorch -c nvidia#######
+  ##############################################################################
