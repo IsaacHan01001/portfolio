@@ -1,4 +1,3 @@
-대회명: Boost up AI 2025 : 신약 개발 경진대회
 URL: https://dacon.io/competitions/official/236527/overview/description
 
 Rank: Team Rank #54 / out of 1044 participants.
